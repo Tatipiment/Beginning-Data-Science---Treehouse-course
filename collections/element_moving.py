@@ -6,42 +6,41 @@ def clear_screen():
 	os.system("cls" if os.name == "nt" else "clear")
 
 
-CELLS = [(0, 0),(0, 1),(0, 3),(0, 4),
-		 (1, 0),(1, 1),(1, 3),(1, 4),
-		 (2, 0),(2, 1),(2, 3),(2, 4),		
-		 (3, 0),(3, 1),(3, 3),(3, 4),
-		 (4, 0),(4, 1),(4, 3),(4, 4),]
+CELLS = [(0, 0),(0, 1),(0, 3),
+		 (1, 0),(1, 1),(1, 3),
+		 (2, 0),(2, 1),(2, 3),		
+		 (3, 0),(3, 1),(3, 3),
+		 (4, 0),(4, 1),(4, 3),]
 
-player_caractere = "ʕᵔᴥᵔʔ|"
-line = ("   " + "-"* 33)
+player_caractere = "ʕ•ᴥ•ʔ|"
+line = ("   " + "-"* 26)
 empty = (5,5)
 
 def drawn_grid(element):
 	player_location = list(element)
 	free_space = "  .  |"
-	grid = [[free_space, free_space, free_space, free_space, free_space],
-			[free_space, free_space, free_space, free_space, free_space],
-			[free_space, free_space, free_space, free_space, free_space],
-			[free_space, free_space, free_space, free_space, free_space],
-			[free_space, free_space, free_space, free_space, free_space]]
-	print("\n\n\n        0  .  1  .  2  .  3  .  4")
+	grid = [[free_space, free_space, free_space, free_space],
+			[free_space, free_space, free_space, free_space],
+			[free_space, free_space, free_space, free_space],
+			[free_space, free_space, free_space, free_space],]
+	print("\n\n\n        0  .  1  .  2  .  3")
 	print(line)
-	for y in range(5):
+	for y in range(4):
 		if player_location[1] == y:
-			for x in range(5):
+			for x in range(4):
 				if player_location[0] == x:
 					grid[y][x] = player_caractere
 				else:
 					grid[y][x] = free_space
-			print(" {} ||{}{}{}{}{}|".format(y, grid[y][0], grid[y][1], grid[y][2], grid[y][3], grid[y][4]))
+			print(" {} ||{}{}{}{}|".format(y, grid[y][0], grid[y][1], grid[y][2], grid[y][3]))
 			print(line)
 		else:
-			print(" {} ||{}{}{}{}{}|".format(y, grid[y][0], grid[y][1], grid[y][2], grid[y][3], grid[y][4]))
+			print(" {} ||{}{}{}{}|".format(y, grid[y][0], grid[y][1], grid[y][2], grid[y][3]))
 			print(line) 
 
 
 clear_screen()  
-print("\nConsegue advinhar onde esta o ursinho vai aparecer?") 
+print("\nAdivinhe onde o Ursinho vai aparecer") 
 while True:
 	drawn_grid(empty)
 	vert = input("\nEm que coluna?\n> ")
@@ -55,14 +54,19 @@ while True:
 		clear_screen()
 		print("\n>>> Resultado: ")
 		player = random.choice(CELLS)
-		drawn_grid(player)
+		
 		
 		vert = int(vert)
 		hori = int(hori)
 
 		if vert == player[0] and hori == player[1]:
+			player_caractere = "ʕᵔᴥᵔʔ|"
+			drawn_grid(player)
 			print("\n>>> Uau! Agora me diz o número da loteria...\n>>> Brinks 😋")
+
 		else:
+			player_caractere = "ʕ˘̩-˘̩ʔ|"
+			drawn_grid(player)
 			print("\n>>> Ahh! Fica pra próxima. 🙏")
 			print("Seu palpite: ({}, {}) \nResultado:   {}".format(vert, hori, player))
 	
